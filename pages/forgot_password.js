@@ -8,7 +8,6 @@ export default function Login() {
   const doResetEmail = () => {
     const auth = getAuth();
     const actionCodeSettings = {
-      
       url: 'http://localhost:3000/login',
       handleCodeInApp: false,
     }

@@ -3,23 +3,26 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Col, Container, Form, FormGroup, Input, Label, Row, Button } from "reactstrap";
 import { useState } from 'react';
 import Link from 'next/link';
+import { Router } from 'react-router-dom';
+import router from 'next/router';
 
 
 export default function Login() {
-  
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+
   const doLogin = () => {
+
     const auth = getAuth();
-    
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        
+
         const user = userCredential.user;
-        
+
         alert('ログインOK!');
         console.log(user);
+        router.push('/');
       })
       .catch((error) => {
         console.log(error);
@@ -39,7 +42,7 @@ export default function Login() {
               type="email"
               name="email"
               style={{ height: 50, fontSize: "1.2rem" }}
-              
+
               onChange={(e) => setEmail(e.target.value)}
             />
           </FormGroup>
@@ -51,14 +54,14 @@ export default function Login() {
               type="password"
               name="password"
               style={{ height: 50, fontSize: "1.2rem" }}
-              
+
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormGroup>
           <Button
             style={{ width: 220 }}
             color="primary"
-            
+
             onClick={() => {
               doLogin();
             }}
@@ -67,15 +70,12 @@ export default function Login() {
           </Button>
         </Form>
       </div>
-      <div style={{flexbox}}>
-      <Link
-        href="/forgot_password">
-        パスワードを忘れた場合
-      </Link>
-      <Link
-        href="/register">
-          新規登録
-      </Link>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Link
+          href="/forgot_password">
+          パスワードを忘れた場合
+        </Link>
+        <Button onClick={() => Router.push('/register')}>新規登録</Button>
       </div>
     </div>
   )
