@@ -1,11 +1,10 @@
 import styles from '../styles/Home.module.css'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { Col, Container, Form, FormGroup, Input, Label, Row, Button } from "reactstrap";
+import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { useState } from 'react';
 import Link from 'next/link';
 import { Router } from 'react-router-dom';
 import router from 'next/router';
-
 
 export default function Login() {
 

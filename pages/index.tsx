@@ -28,7 +28,8 @@ export default function Home() {
     }
 
     if (!user) {
-        return router.push('/login')
+        router.push('/login')
+        return <div>Redirecting...</div>
     }
 
     return <div>Welcome, {user.displayName}!</div>
