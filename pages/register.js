@@ -35,7 +35,6 @@ export default function Register() {
               type="email"
               name="email"
               style={{ height: 50, fontSize: "1.2rem" }}
-
               onChange={(e) => setEmail(e.target.value)}
             />
           </FormGroup>

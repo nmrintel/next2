@@ -2,7 +2,7 @@ import { Button } from 'reactstrap';
 import { useAuth } from '../context/AuthContext'
 import { getAuth, signOut } from "firebase/auth";
 
-const Header = () => {
+function Header (){
   // 現在ログインしているユーザーを取得する
   const { currentUser } = useAuth();
   // console.log(currentUser);
