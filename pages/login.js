@@ -5,10 +5,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Router } from 'react-router-dom';
 import router from 'next/router';
-<<<<<<< HEAD
-=======
-
->>>>>>> 6089520eef7713300acbc24ebe7396d8f89e4218
 
 export default function Login() {
 

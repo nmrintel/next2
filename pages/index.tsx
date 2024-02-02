@@ -28,12 +28,8 @@ export default function Home() {
     }
 
     if (!user) {
-<<<<<<< HEAD
         router.push('/login')
         return <div>Redirecting...</div>
-=======
-        return router.push('/login')
->>>>>>> 6089520eef7713300acbc24ebe7396d8f89e4218
     }
 
     return <div>Welcome, {user.displayName}!</div>
