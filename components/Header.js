@@ -1,6 +1,7 @@
 import { Button } from 'reactstrap';
 import { useAuth } from '../context/AuthContext'
 import { getAuth, signOut } from "firebase/auth";
+import { Nav, NavItem, NavLink } from 'reactstrap';
 
 function Header() {
   const { currentUser } = useAuth();
@@ -22,12 +23,11 @@ function Header() {
       {currentUser ?
 
         <div suppressHydrationWarning={true}>
-          <div2 style={{ display: "flex", alignItems: "center" ,justifyContent: "space-between"}}>
+            <div2 style={{ display: "flex", alignItems: "center" ,justifyContent: "space-between",}}>
 
             <a href="./">
               <div style={{ display: "flex", alignItems: "center" }}>
-                <img src="./favicon.ico" alt="Next" style={{ width: "80px", height: "80px" }} />
-                <h1 style={{ marginLeft: "1rem" }}>ページのヘッダ</h1>
+                <img src="./home.png" alt="Next" style={{ width: "400px", height: "80px" }} />
               </div>
             </a>
 
@@ -41,6 +41,35 @@ function Header() {
             </login>
 
           </div2>
+
+          <Nav
+  card
+  fill
+  justified
+  tabs
+>
+  <NavItem>
+    <NavLink
+      active
+      href="#"
+    >
+      Link
+    </NavLink>
+  </NavItem>
+  <NavItem>
+    <NavLink href="#">
+      Another Link
+    </NavLink>
+  </NavItem>
+  <NavItem>
+    <NavLink
+      disabled
+      href="#"
+    >
+      Disabled Link
+    </NavLink>
+  </NavItem>
+</Nav>
 
         </div>
         :
