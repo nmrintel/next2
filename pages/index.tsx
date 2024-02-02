@@ -2,7 +2,6 @@
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 import { User } from 'firebase/auth' // Import the User type
-import { Router,RouterProvider } from 'react-router-dom'
 import {useRouter} from 'next/router'
 
 export function useAuth() {

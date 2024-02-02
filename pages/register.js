@@ -1,8 +1,7 @@
 import styles from '../styles/Home.module.css'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
-import { Col, Container, Form, FormGroup, Input, Label, Row, Button } from "reactstrap";
+import {Form, FormGroup, Input, Label, Row, Button } from "reactstrap";
 import { useState } from 'react';
-import firebaseApp from '../lib/FirebaseConfig';
 
 export default function Register() {
   const [email, setEmail] = useState('');
