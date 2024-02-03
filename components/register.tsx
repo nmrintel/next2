@@ -1,9 +1,9 @@
 import styles from '../styles/Home.module.css'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
-import {Form, FormGroup, Input, Label, Row, Button } from "reactstrap";
+import { Form, FormGroup, Input, Label, Row, Button } from "reactstrap";
 import { useState } from 'react';
 
-export default function Register() {
+export default function Register({ onSwitch }: { onSwitch: () => void }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -48,15 +48,18 @@ export default function Register() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormGroup>
-          <Button
-            style={{ width: 220 }}
-            color="primary"
-            onClick={() => {
-              doRegister();
-            }}
-          >
-            登録
-          </Button>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Button
+              color="primary"
+              onClick={() => {
+                doRegister();
+              }}
+            >
+              登録
+            </Button>
+            
+            <Button onClick={onSwitch}>戻る</Button>
+          </div>
         </Form>
       </div>
     </div>

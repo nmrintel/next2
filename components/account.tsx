@@ -1,0 +1,54 @@
+import React, { useState } from 'react';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Form, FormGroup, Input, Label, Button } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import Link from 'next/link';
+import Login from './login'
+import Register from './register'
+import ResetPassword from './forgetPassword'
+
+export default function Account() {
+    const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
+
+    const [login, setLogin] = useState(0);
+    const handleSwitch = () => {
+        setLogin(1);
+    }
+
+    const callBackLogin = () => {
+        setLogin(0);
+    }
+
+    const callBackRegister = () => {
+        setLogin(1);
+    }
+
+    const callBackReset = () => {
+        setLogin(2);
+    }
+
+    const renderContent = () => {
+        if (login === 0) {
+            return <Login onSwitch1={callBackReset} onSwitch2={callBackRegister} />;
+        } else if (login === 1) {
+            return <Register onSwitch={callBackLogin}/>;
+        } else if (login === 2) {
+            return <ResetPassword onSwitch={callBackLogin}/>;
+        }
+    }
+
+    return (
+        <div>
+            <Button color="danger" onClick={toggle} size="lg">
+                ログイン
+            </Button>
+            <Modal isOpen={modal} toggle={toggle}>
+                <ModalHeader toggle={toggle}>アカウント</ModalHeader>
+                <ModalBody>
+                    {renderContent()}
+                </ModalBody>
+            </Modal>
+        </div>
+    );
+}

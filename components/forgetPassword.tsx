@@ -2,13 +2,15 @@ import styles from '../styles/Home.module.css'
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { Col, Container, Form, FormGroup, Input, Label, Row, Button } from "reactstrap";
 import { useState } from 'react';
-export default function Login() {
+import { on } from 'events';
+
+export default function ResetPassword({onSwitch}: {onSwitch: () => void}){
   const [email, setEmail] = useState('');
   
   const doResetEmail = () => {
     const auth = getAuth();
     const actionCodeSettings = {
-      url: 'http://localhost:3000/login',
+      url: 'http://localhost:3000',
       handleCodeInApp: false,
     }
     
@@ -39,15 +41,19 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </FormGroup>
-            <Button
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Button
                 style={{ width: 220 }}
                 color="primary"
-                onClick={()=>{
+                onClick={() => {
                   doResetEmail();
                 }}
               >
-              送信
-            </Button>
+                送信
+              </Button>
+              <Button onClick={onSwitch}>戻る</Button>
+            </div>
+
         </Form>
       </div>  
     </div>
