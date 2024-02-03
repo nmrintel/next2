@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { Form, FormGroup, Input, Label, Button } from "reactstrap";
+import {Button } from "reactstrap";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import Link from 'next/link';
 import Login from './login'
 import Register from './register'
 import ResetPassword from './forgetPassword'

@@ -3,7 +3,7 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 import Account from './account';
 import Logout from './logout';
 
-export default function Header() {
+export default function Header({ onSwitch1, onSwitch2}:{onSwitch1:()=>void, onSwitch2:()=>void}) {
   const { currentUser } = useAuth();
 
   return (
@@ -38,13 +38,16 @@ export default function Header() {
           <NavItem>
             <NavLink
               active
+              onClick={onSwitch1}
             >
               自分のポートフォリオをみる
             </NavLink>
           </NavItem>
 
           <NavItem>
-            <NavLink href="#">
+            <NavLink
+            active
+            onClick={onSwitch2}>
               自分のポートフォリオの編集する
             </NavLink>
           </NavItem>

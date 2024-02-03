@@ -1,8 +1,7 @@
 import styles from '../styles/Home.module.css'
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import { Col, Container, Form, FormGroup, Input, Label, Row, Button } from "reactstrap";
+import {Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { useState } from 'react';
-import { on } from 'events';
 
 export default function ResetPassword({onSwitch}: {onSwitch: () => void}){
   const [email, setEmail] = useState('');
