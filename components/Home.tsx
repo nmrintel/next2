@@ -1,11 +1,7 @@
-import useAuth  from './useAuth'
+import {useAuth}  from './AuthContext'
 
 export default function Home() {
-    const { user, loading } = useAuth()
-
-    if (loading) {
-        return <div>Loading...</div>
-    }
+    const { user } = useAuth()
 
     if (!user) {
         return <div>ログインしてね</div>

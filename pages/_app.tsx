@@ -4,7 +4,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react"
 import Header from "../components/Header"
-import { AuthProvider } from "../context/AuthContext"
+import { AuthProvider } from "../components/AuthContext"
 
 export default function MyApp({ Component, pageProps }: { Component: React.ElementType, pageProps: any }) {
   return (<>

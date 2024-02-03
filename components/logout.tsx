@@ -1,8 +1,5 @@
 import { Button } from 'reactstrap';
-import { useAuth } from '../context/AuthContext'
 import { getAuth, signOut } from "firebase/auth";
-import { Nav, NavItem, NavLink } from 'reactstrap';
-import Login from './account';
 
 export default function Logout(onSwitch: any) {
     const doLogout = () => {

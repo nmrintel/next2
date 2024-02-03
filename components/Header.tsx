@@ -1,5 +1,4 @@
-import { Button } from 'reactstrap';
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from './AuthContext'
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import Account from './account';
 import Logout from './logout';
