@@ -9,7 +9,6 @@ export default function Header() {
 
   return (
     <div style={{ padding: "1rem 0" }} >
-
       <div suppressHydrationWarning={true}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", }}>
           <a href="./">
@@ -29,8 +28,6 @@ export default function Header() {
               <Account />
             </div>
           }
-
-
         </div>
 
         <Nav
