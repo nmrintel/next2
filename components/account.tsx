@@ -10,9 +10,6 @@ export default function Account() {
     const toggle = () => setModal(!modal);
 
     const [login, setLogin] = useState(0);
-    const handleSwitch = () => {
-        setLogin(1);
-    }
 
     const callBackLogin = () => {
         setLogin(0);

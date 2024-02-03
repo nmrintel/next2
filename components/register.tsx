@@ -1,24 +1,36 @@
 import styles from '../styles/Home.module.css'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
-import { Form, FormGroup, Input, Label,Button } from "reactstrap";
+import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { useState } from 'react';
+//import { db } from "../lib/FirebaseConfig"; // Add this line to export the 'db' variable
+import { addDoc, setDoc, collection } from 'firebase/firestore';
+import firebase from 'firebase/app';
+
+
 
 export default function Register({ onSwitch }: { onSwitch: () => void }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const doRegister = () => {
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        alert('登録完了！');
-        console.log(user);
-      })
-      .catch((error) => {
-        console.log(error);
-        alert('登録失敗')
-      });
+  const doRegister = async () => {
+
+    try {
+      const auth = getAuth();
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      alert('登録完了！');
+      console.log(user);
+
+
+      // const docRef = await addDoc(collection(db, "users"), {
+      //   first: "Ada",
+      //   last: "Lovelace",
+      //   born: 1815
+      // });
+      //console.log("Document written with ID: ", docRef.id);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
   }
 
   return (
@@ -57,7 +69,7 @@ export default function Register({ onSwitch }: { onSwitch: () => void }) {
             >
               登録
             </Button>
-            
+
             <Button onClick={onSwitch}>戻る</Button>
           </div>
         </Form>
