@@ -1,6 +1,5 @@
 import { Button } from 'reactstrap';
 import { useAuth } from '../context/AuthContext'
-import { getAuth, signOut } from "firebase/auth";
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import Account from './account';
 import Logout from './logout';
@@ -20,12 +19,13 @@ export default function Header() {
           </a>
 
           {currentUser ?
-            <div>
+            <div style={{ display: "flex", alignItems: "center" }}>
               <div>{currentUser.email} でログインしています。</div>
               <Logout />
             </div>
             :
-            <div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div>ログインしていません  </div>
               <Account />
             </div>
           }
@@ -42,22 +42,13 @@ export default function Header() {
           <NavItem>
             <NavLink
               active
-              href="#"
             >
-              Link
+              自分のポートフォリオ
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink href="#">
-              Another Link
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              disabled
-              href="#"
-            >
-              Disabled Link
+              他人の
             </NavLink>
           </NavItem>
         </Nav>

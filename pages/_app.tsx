@@ -6,14 +6,11 @@ import React from "react"
 import Header from "../components/Header"
 import { AuthProvider } from "../context/AuthContext"
 
-function MyApp({ Component, pageProps }: { Component: React.ElementType, pageProps: any }) {
+export default function MyApp({ Component, pageProps }: { Component: React.ElementType, pageProps: any }) {
   return (<>
     <AuthProvider>
-      <Header />
       <Component {...pageProps} />
     </AuthProvider>
   </>)
 
 }
-
-export default MyApp
