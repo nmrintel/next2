@@ -40,11 +40,11 @@ export default function Account() {
 
     return (
         <div>
-            <Button color="danger" onClick={toggle} size="lg">
+            <Button color="danger" onClick={toggle} style={{ width: 300, height: 60, margin: '10px' }}>
                 ログイン
             </Button>
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>アカウント</ModalHeader>
+                <ModalHeader toggle={toggle}>アカウント(デモ:bowmrban@na-cat.com/111111)</ModalHeader>
                 <ModalBody>
                     {renderContent()}
                 </ModalBody>

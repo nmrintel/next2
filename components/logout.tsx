@@ -18,9 +18,9 @@ export default function Logout(onSwitch: any) {
     }
 
     return (
-        <Button style={{ width: 220 }} onClick={() => {
-            doLogout();
-          }}
-          >ログアウト</Button>
-    )
+                <Button style={{ width: 300, height: 60 }}  onClick={() => {
+                        doLogout();
+                    }}
+                    >ログアウト</Button>
+        )
 }

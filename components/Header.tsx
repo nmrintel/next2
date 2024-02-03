@@ -24,7 +24,7 @@ export default function Header() {
               <Logout />
             </div>
             :
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ display: "flex", alignItems: "center",justifyContent:"space-between" }}>
               <div>ログインしていません  </div>
               <Account />
             </div>
@@ -43,14 +43,16 @@ export default function Header() {
             <NavLink
               active
             >
-              自分のポートフォリオ
+              自分のポートフォリオをみる
             </NavLink>
           </NavItem>
+
           <NavItem>
             <NavLink href="#">
-              他人の
+              自分のポートフォリオの編集する
             </NavLink>
           </NavItem>
+          
         </Nav>
 
       </div>
