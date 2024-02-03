@@ -1,6 +1,6 @@
 import styles from '../styles/Home.module.css'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
-import { Form, FormGroup, Input, Label, Row, Button } from "reactstrap";
+import { Form, FormGroup, Input, Label,Button } from "reactstrap";
 import { useState } from 'react';
 
 export default function Register({ onSwitch }: { onSwitch: () => void }) {

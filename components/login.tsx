@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import Link from 'next/link';
 
 
 export default function Login({ onSwitch1, onSwitch2 }: { onSwitch1: () => void, onSwitch2: () => void }) {
