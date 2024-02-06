@@ -1,9 +1,10 @@
-import Home from './Home'
 import Header from './Header'
 import { useState } from 'react'
 import Edit from './Edit'
 import { useAuth } from './AuthContext';
-
+import PageMotion from './motion'
+import React from "react"
+import Viewer from './View'
 
 export default function Main() {
     const [mode, setMode] = useState(0)
@@ -20,7 +21,7 @@ export default function Main() {
 
     const RenderComponent = () => {
         if (mode === 0) {
-            return <Home />;
+            return <PageMotion Children={Viewer} />;
         } else if (mode === 1) {
             if (users.currentUser) {
                 return <Edit />;
@@ -35,7 +36,7 @@ export default function Main() {
 
     return (
         <>
-            <Header onSwitch1={SwitchToView} onSwitch2={SwitchToEdit} mode={mode}/>
+            <Header onSwitch1={SwitchToView} onSwitch2={SwitchToEdit} mode={mode} />
             {RenderComponent()}
         </>
     );
