@@ -2,36 +2,33 @@ import styles from '../styles/Home.module.css'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { useState } from 'react';
-//import { db } from "../lib/FirebaseConfig"; // Add this line to export the 'db' variable
 import { addDoc, setDoc, collection } from 'firebase/firestore';
-import firebase from 'firebase/app';
+import { writeToFirestore } from '@/lib/FirebaseConfig';
 
 
 
 export default function Register({ onSwitch }: { onSwitch: () => void }) {
+  console.log('Register')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const doRegister = async () => {
+  const doRegister = async (event:any) => {
+    event.preventDefault();
 
     try {
       const auth = getAuth();
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       alert('登録完了！');
-      console.log(user);
-
-
-      // const docRef = await addDoc(collection(db, "users"), {
-      //   first: "Ada",
-      //   last: "Lovelace",
-      //   born: 1815
-      // });
-      //console.log("Document written with ID: ", docRef.id);
+      const userId = user?.email;
+      writeToFirestore("userProfile",userId,{name:"aaa"});
     } catch (error) {
       console.error("Error adding document: ", error);
+      alert('登録失敗(重複したメールアドレス等)');
     }
   }
+
+
 
   return (
     <div className={styles.card}>
@@ -63,8 +60,8 @@ export default function Register({ onSwitch }: { onSwitch: () => void }) {
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Button
               color="primary"
-              onClick={() => {
-                doRegister();
+              onClick={(event) => {
+                doRegister(event);
               }}
             >
               登録

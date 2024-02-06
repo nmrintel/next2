@@ -30,10 +30,9 @@ export default function Header({ onSwitch1, onSwitch2}:{onSwitch1:()=>void, onSw
         </div>
 
         <Nav
-          card
-          fill
           justified
           tabs
+          card
         >
           <NavItem>
             <NavLink
