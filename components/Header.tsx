@@ -3,7 +3,7 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 import Account from './account';
 import Logout from './logout';
 
-export default function Header({ onSwitch1, onSwitch2}:{onSwitch1:()=>void, onSwitch2:()=>void}) {
+export default function Header({ onSwitch1, onSwitch2,mode}:{onSwitch1:()=>void, onSwitch2:()=>void,mode:number}) {
   const { currentUser } = useAuth();
 
   return (
@@ -38,6 +38,8 @@ export default function Header({ onSwitch1, onSwitch2}:{onSwitch1:()=>void, onSw
             <NavLink
               active
               onClick={onSwitch1}
+              style={{ color: (mode==0) ? "white" : "blue" ,backgroundColor: (mode==0) ? "blue" : "white"}}
+              
             >
               自分のポートフォリオをみる
             </NavLink>
@@ -46,7 +48,9 @@ export default function Header({ onSwitch1, onSwitch2}:{onSwitch1:()=>void, onSw
           <NavItem>
             <NavLink
             active
-            onClick={onSwitch2}>
+            onClick={onSwitch2}
+            style={{ color: !(mode === 0) ? "white" : "blue" ,backgroundColor: !(mode === 0) ? "blue" : "white"}}
+            >
               自分のポートフォリオの編集する
             </NavLink>
           </NavItem>

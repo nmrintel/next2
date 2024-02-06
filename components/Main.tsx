@@ -35,7 +35,7 @@ export default function Main() {
 
     return (
         <>
-            <Header onSwitch1={SwitchToView} onSwitch2={SwitchToEdit} />
+            <Header onSwitch1={SwitchToView} onSwitch2={SwitchToEdit} mode={mode}/>
             {RenderComponent()}
         </>
     );
