@@ -3,7 +3,7 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 import Account from './account/account';
 import Logout from './account/logout';
 
-export default function Header({ onSwitch1, onSwitch2,mode}:{onSwitch1:()=>void, onSwitch2:()=>void,mode:number}) {
+export default function Header({ onSwitch1, onSwitch2, mode }: { onSwitch1: () => void, onSwitch2: () => void, mode: number }) {
   const { currentUser } = useAuth();
 
   return (
@@ -22,7 +22,7 @@ export default function Header({ onSwitch1, onSwitch2,mode}:{onSwitch1:()=>void,
               <Logout />
             </div>
             :
-            <div style={{ display: "flex", alignItems: "center",justifyContent:"space-between" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <div>ログインしていません  </div>
               <Account />
             </div>
@@ -38,8 +38,7 @@ export default function Header({ onSwitch1, onSwitch2,mode}:{onSwitch1:()=>void,
             <NavLink
               active
               onClick={onSwitch1}
-              style={{ color: (mode==0) ? "white" : "blue" ,backgroundColor: (mode==0) ? "blue" : "white"}}
-              
+              style={{ color: (mode == 0) ? "white" : "blue", backgroundColor: (mode == 0) ? "blue" : "white" }}
             >
               自分のポートフォリオをみる
             </NavLink>
@@ -47,14 +46,14 @@ export default function Header({ onSwitch1, onSwitch2,mode}:{onSwitch1:()=>void,
 
           <NavItem>
             <NavLink
-            active
-            onClick={onSwitch2}
-            style={{ color: !(mode === 0) ? "white" : "blue" ,backgroundColor: !(mode === 0) ? "blue" : "white"}}
+              active
+              onClick={onSwitch2}
+              style={{ color: !(mode === 0) ? "white" : "blue", backgroundColor: !(mode === 0) ? "blue" : "white" }}
             >
               自分のポートフォリオの編集する
             </NavLink>
           </NavItem>
-          
+
         </Nav>
 
       </div>
