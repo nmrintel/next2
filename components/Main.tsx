@@ -1,7 +1,7 @@
 import Header from './Header'
 import { useState } from 'react'
 import Edit from './Edit'
-import { useAuth } from './AuthContext';
+import { useAuth } from '../lib/AuthContext';
 import PageMotion from './motion'
 import React from "react"
 import Viewer from './View'

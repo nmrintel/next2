@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { writeToFirestore, readFromFirestore, addToFirestore } from "@/lib/FirebaseConfig";
 import { set } from 'firebase/database';
-import { useAuth } from './AuthContext';
+import { useAuth } from '../lib/AuthContext';
 
 
 function Edit() {

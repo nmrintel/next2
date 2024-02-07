@@ -16,6 +16,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/AuthContext.js", "components/motion.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/AuthContext.js", "components/motion.js"],
   "exclude": ["node_modules"]
 }

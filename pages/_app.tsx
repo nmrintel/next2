@@ -3,7 +3,7 @@
 // ↓ これを追加してBootstrapで読み込む
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react"
-import { AuthProvider } from "../components/AuthContext"
+import { AuthProvider } from "../lib/AuthContext"
 
 export default function MyApp({ Component, pageProps }: { Component: React.ElementType, pageProps: any }) {
   return (<>

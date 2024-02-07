@@ -1,7 +1,7 @@
-import { useAuth } from './AuthContext'
+import { useAuth } from '../lib/AuthContext'
 import { Nav, NavItem, NavLink } from 'reactstrap';
-import Account from './account';
-import Logout from './logout';
+import Account from './account/account';
+import Logout from './account/logout';
 
 export default function Header({ onSwitch1, onSwitch2,mode}:{onSwitch1:()=>void, onSwitch2:()=>void,mode:number}) {
   const { currentUser } = useAuth();

@@ -1,4 +1,4 @@
-import styles from '../styles/Home.module.css'
+import styles from '@/styles/Home.module.css'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { useState } from 'react';
