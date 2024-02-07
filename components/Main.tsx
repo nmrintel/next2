@@ -1,6 +1,6 @@
 import Header from './Header'
 import { useState } from 'react'
-import Edit from './Edit'
+import Edit from './Editer/Edit'
 import { useAuth } from '../lib/AuthContext';
 import PageMotion from './motion'
 import React from "react"

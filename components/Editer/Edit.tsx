@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { writeToFirestore, readFromFirestore, addToFirestore } from "@/lib/FirebaseConfig";
+import { writeToFirestore, readFromFirestore } from "@/lib/FirebaseConfig";
 import { set } from 'firebase/database';
-import { useAuth } from '../lib/AuthContext';
+import { useAuth } from '@/lib/AuthContext';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import ImageUploadForm from './Image';
 
 export default function Edit() {
   console.log("Edit");
@@ -27,11 +28,6 @@ export default function Edit() {
     console.log("Error getting document:", error);
   });
 
-  
-  console.log(profile);
-
- 
-
   const userID = useAuth().currentUser.email;
 
   const handleSubmit = (event: any) => {
@@ -50,29 +46,37 @@ export default function Edit() {
   };
 
   return (
-    <div style={{ margin: '100px' }}>
-      <Form onSubmit={handleSubmit}>
-        <FormGroup>
-          <Label for="exampleText">名前</Label>
-          <Input type="text" name="text" id="exampleText" value={inputValue1} onChange={e => setInputValue1(e.target.value)} />
-        </FormGroup>
+    <div>
+      <div style={{ margin: '100px' }}>
+        <h1>プロフィール画像</h1>
+        <ImageUploadForm />
+      </div>
+      <div style={{ margin: '100px' }}>
+        <h1>プロフィール編集</h1>
+        <Form onSubmit={handleSubmit}>
+          <FormGroup>
+            <Label for="exampleText">名前</Label>
+            <Input type="text" name="text" id="exampleText" value={inputValue1} onChange={e => setInputValue1(e.target.value)} />
+          </FormGroup>
 
-        <FormGroup>
-          <Label for="exampleText">年齢</Label>
-          <Input type="text" name="text" id="exampleText" value={inputValue2} onChange={e => setInputValue2(e.target.value)} />
-        </FormGroup>
+          <FormGroup>
+            <Label for="exampleText">年齢</Label>
+            <Input type="text" name="text" id="exampleText" value={inputValue2} onChange={e => setInputValue2(e.target.value)} />
+          </FormGroup>
 
-        <FormGroup>
-          <Label for="exampleText">所属</Label>
-          <Input type="text" name="text" id="exampleText" value={inputValue3} onChange={e => setInputValue3(e.target.value)} />
-        </FormGroup>
+          <FormGroup>
+            <Label for="exampleText">所属</Label>
+            <Input type="text" name="text" id="exampleText" value={inputValue3} onChange={e => setInputValue3(e.target.value)} />
+          </FormGroup>
 
-        <FormGroup>
-          <Label for="exampleText">趣味</Label>
-          <Input type="text" name="text" id="exampleText" value={inputValue4} onChange={e => setInputValue4(e.target.value)} />
-        </FormGroup>
-        <Button type="submit">プロフィールを更新する</Button>
-      </Form>
+          <FormGroup>
+            <Label for="exampleText">趣味</Label>
+            <Input type="text" name="text" id="exampleText" value={inputValue4} onChange={e => setInputValue4(e.target.value)} />
+          </FormGroup>
+          <Button type="submit">プロフィールを更新する</Button>
+        </Form>
+      </div>
     </div>
+
   );
 }
