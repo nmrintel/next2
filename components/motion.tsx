@@ -31,23 +31,3 @@ export default function PageMotion({ Children}:{Children:React.ElementType}) {
     </motion.div>
   );
 }
-
-
-// export default function page() {
-//   return (
-//     <motion.div
-//       initial="hidden"
-//       animate="visible"
-//       exit="exit"
-//       variants={pageTransition}
-//     >
-//       <h1>hello</h1>
-//     </motion.div>
-//   );
-// }
-
-// export default function PageMotion() {
-//   return (
-//     <h1>hello</h1>
-//   );
-// }

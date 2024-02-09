@@ -114,7 +114,7 @@ export default function Edit(this: any) {
 
       <div style={{ margin: '100px' }}>
         <h1>使用言語</h1>
-        <Form onSubmit={handleSubmit2}>
+        <Form>
 
           <FormGroup
             check
@@ -165,10 +165,8 @@ export default function Edit(this: any) {
               Next.js
             </Label>
           </FormGroup>
-
-          <Button type="submit">使用言語を更新する</Button>
-
         </Form>
+        <Button onClick={handleSubmit2}>使用言語を更新する</Button>
       </div>
 
     </div>

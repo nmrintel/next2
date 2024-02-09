@@ -21,13 +21,27 @@ export default function Main() {
 
     const RenderComponent = () => {
         if (mode === 0) {
-            return <PageMotion Children={Viewer} />;
+            if (users.currentUser) {
+                return <PageMotion Children={Viewer} />;
+            }
+            else {
+                return (
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                        <h1>ログインしてください</h1>
+                    </div>
+                );
+            }
+
         } else if (mode === 1) {
             if (users.currentUser) {
                 return <Edit />;
             }
             else {
-                return <h1>ログインしてください</h1>
+                return (
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                        <h1>ログインしてください</h1>
+                    </div>
+                );
             }
         } else {
             return null;
