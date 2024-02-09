@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { writeToFirestore, readFromFirestore,updateFirestore,readFromFiresotre2} from "@/lib/FirebaseConfig";
+import { writeToFirestore, readFromFirestore, updateFirestore, readFromFiresotre2 } from "@/lib/FirebaseConfig";
 import { set } from 'firebase/database';
 import { useAuth } from '@/lib/AuthContext';
 import firebase from 'firebase/app';
@@ -14,8 +14,35 @@ export default function Edit(this: any) {
   const [inputValue2, setInputValue2] = useState('')
   const [inputValue3, setInputValue3] = useState('')
 
-  let profile: { name: string, age: string, affiliation: string}
-    = { name: "", age: "", affiliation: ""}
+  const [ch1, setCh1] = useState(false);
+  const handleCheck1 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCh1(event.target.checked);
+  }
+
+  const [ch2, setCh2] = useState(false);
+  const handleCheck2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCh2(event.target.checked);
+  }
+
+  const [ch3, setCh3] = useState(false);
+  const handleCheck3 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCh3(event.target.checked);
+  }
+
+  const [ch4, setCh4] = useState(false);
+  const handleCheck4 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCh4(event.target.checked);
+  }
+
+  const [ch5, setCh5] = useState(false);
+  const handleCheck5 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCh5(event.target.checked);
+  }
+  
+
+
+  let profile: { name: string, age: string, affiliation: string }
+    = { name: "", age: "", affiliation: "" }
 
   const userID = useAuth().currentUser.email;
 
@@ -40,13 +67,29 @@ export default function Edit(this: any) {
     });
   };
 
+  const handleSubmit2 = (event: any) => {
+    console.log("handleSubmit2");
+    event.preventDefault();
+    alert("使用言語を更新しました");
+    writeToFirestore("userProfile", userID, {
+      language: {
+        Python: ch1,
+        C: ch2,
+        Java: ch3,
+        JavaScript: ch4,
+        Nextjs: ch5
+      }
+    });
+  };
+
 
   return (
     <div>
       <div style={{ margin: '100px' }}>
         <h1>新しいプロフィール画像</h1>
-        <ImageUploadForm/>
+        <ImageUploadForm />
       </div>
+
       <div style={{ margin: '100px' }}>
         <h1>プロフィール編集</h1>
         <Form onSubmit={handleSubmit}>
@@ -68,6 +111,66 @@ export default function Edit(this: any) {
           <Button type="submit">プロフィールを更新する</Button>
         </Form>
       </div>
+
+      <div style={{ margin: '100px' }}>
+        <h1>使用言語</h1>
+        <Form onSubmit={handleSubmit2}>
+
+          <FormGroup
+            check
+            inline
+          >
+            <Input type="checkbox" checked={ch1} onChange={handleCheck1}/>
+            <Label check>
+              Python
+            </Label>
+          </FormGroup>
+
+          <FormGroup
+            check
+            inline
+          >
+            <Input type="checkbox" checked={ch2} onChange={handleCheck2} />
+            <Label check>
+              C
+            </Label>
+          </FormGroup>
+
+          <FormGroup
+            check
+            inline
+          >
+            <Input type="checkbox" checked={ch3} onChange={handleCheck3} />
+            <Label check>
+              Java
+            </Label>
+          </FormGroup>
+
+          <FormGroup
+            check
+            inline
+          >
+            <Input type="checkbox" checked={ch4} onChange={handleCheck4} />
+            <Label check>
+              JavaScript
+            </Label>
+          </FormGroup>
+
+          <FormGroup
+            check
+            inline
+          >
+            <Input type="checkbox" checked={ch5} onChange={handleCheck5} />
+            <Label check>
+              Next.js
+            </Label>
+          </FormGroup>
+
+          <Button type="submit">使用言語を更新する</Button>
+
+        </Form>
+      </div>
+
     </div>
 
   );
