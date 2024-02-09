@@ -21,7 +21,12 @@ export default function Register({ onSwitch }: { onSwitch: () => void }) {
       const user = userCredential.user;
       alert('登録完了！');
       const userId = user?.email;
-      writeToFirestore("userProfile",userId,{name:"aaa"});
+      if (userId) {
+        writeToFirestore("userProfile", userId, { imageUrl: "gs://authtest-f6078.appspot.com/images/noImage.png" });
+      }
+      else{
+        console.log('userId is null');
+      }
     } catch (error) {
       console.error("Error adding document: ", error);
       alert('登録失敗(重複したメールアドレス等)');

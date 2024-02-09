@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { doc, setDoc, getDoc } from 'firebase/firestore'
+import { doc, setDoc, getDoc,updateDoc } from 'firebase/firestore'
 import "firebase/auth"
 import "firebase/firestore"
 import { getAuth } from "firebase/auth";
@@ -26,7 +26,7 @@ export  async function writeToFirestore(collection:string, docId:string, data:an
   if (!docId) return console.error("Document ID is required")
   if (!data) return console.error("Data is required")
   try {
-    await setDoc(doc(db, collection, docId), data);
+    await updateDoc(doc(db, collection, docId), data);
     console.log("Document written successfully");
   } catch (error) {
     console.error("Error writing document: ", error);
@@ -35,25 +35,60 @@ export  async function writeToFirestore(collection:string, docId:string, data:an
 
 export async function readFromFirestore(collection:string, docId:string) {
   try {
-    if (!docId) return console.error("Document ID is required")
-    if (!collection) return console.error("Collection is required")
+    if (!docId) return console.error("Document ID is required(readFromFiresotre in firebaseConfig)")
+    if (!collection) return console.error("Collection is required(readFromFiresotre in firebaseConfig)")
 
     const docSnap = await getDoc(doc(db, collection, docId));
     if (docSnap.exists()) {
-      console.log("Document data(firebaseConfig):", docSnap.data());
+      console.log("Document data(readFromFiresotre in firebaseConfig):", docSnap.data());
       return docSnap.data();
     } else {
-      console.log("No such document!(firebaseConfig)");
+      console.log("No such document!(readFromFiresotre in firebaseConfig)");
     }
   } catch (error) {
     console.error("Error reading document: ", error);
   }
 }
 
+export async function readFromFiresotre2(collection:string, docId:string,data_name:string) {
+  try {
+    if (!docId) return console.error("Document ID is required(readFromFiresotre in firebaseConfig)")
+    if (!collection) return console.error("Collection is required(readFromFiresotre in firebaseConfig)")
+    if(!data_name) return console.error("Data name is required(readFromFiresotre in firebaseConfig)")
+
+    const docSnap = await getDoc(doc(db, collection, docId));
+    if (docSnap.exists()) {
+      console.log("Document data(readFromFiresotre in firebaseConfig):", docSnap.data());
+      const specificData = docSnap.data()?.[data_name]; // Access specific data field using dot notation
+      console.log("Specific data:", specificData);
+      return specificData;
+    } else {
+      console.log("No such document!(readFromFiresotre in firebaseConfig)");
+    }
+  } catch (error) {
+    console.error("Error reading document: ", error);
+  }
+}
+
+export function updateFirestore(collection:string, docId:string, data_name:string, data:any){
+  if (!docId) return console.error("Document ID is required")
+  if (!data) return console.error("Data is required")
+  if (!data_name) return console.error("Data name is required")
+  if(!collection) return console.error("Collection is required")
+  
+  const docRef = doc(db, collection, docId);
+  setDoc(docRef, {
+    [data_name]: data
+  }, { merge: true });
+  console.log("Document was updated successfully");
+}
 
 export async function uploadImage(file: File): Promise<string> {
+  if(!file){
+    alert("No file");
+    return Promise.reject("No file");
+  }
   const storageRef = ref(storage, `images/${file.name}`);
-
   const uploadTask = uploadBytesResumable(storageRef, file);
 
   return new Promise((resolve, reject) => {
@@ -74,5 +109,6 @@ export async function uploadImage(file: File): Promise<string> {
     );
   });
 }
+
 
 export { auth};

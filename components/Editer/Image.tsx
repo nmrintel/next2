@@ -3,31 +3,29 @@ import { Button, Form, Input } from 'reactstrap';
 import { uploadImage } from '@/lib/FirebaseConfig';
 import firebase from 'firebase/app';
 import 'firebase/storage';
+import test from 'node:test';
+import DisplayImg from '@/components/Editer/display';
+import { updateFirestore,readFromFiresotre2 } from '@/lib/FirebaseConfig';
+import { useAuth } from '@/lib/AuthContext';
 
 const ImageUploadForm = () => {
-  const [image, setImage] = useState(null);
-  const [url, setUrl] = useState("");
+  const DocID = useAuth().currentUser.email;
 
-  const handleChange = (e:any) => {
+  async function handleChange(e:any){
     if (e.target.files[0]) {
-      setImage(e.target.files[0]);
+      const returnedURL:string = await uploadImage(e.target.files[0]);
+      updateFirestore("userProfile", DocID, "imageUrl", returnedURL);
     }
   };
-
-  async function handleUpload(file:any){
-    const returnedURL:string = await uploadImage(file); // Remove the explicit type annotation
-    setUrl(returnedURL);
-  }
-
-
 
   return (
     <Form>
       <Input type="file" onChange={handleChange} />
-      <Button color="primary" onClick={() => handleUpload(image)}>Upload</Button>
-      {url && <a href={url}>View Image</a>}
+      <DisplayImg />
     </Form>
   );
 };
+
+
 
 export default ImageUploadForm;
