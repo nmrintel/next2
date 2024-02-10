@@ -3,29 +3,31 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { useState } from 'react';
 import { addDoc, setDoc, collection } from 'firebase/firestore';
-import { writeToFirestore } from '@/lib/FirebaseConfig';
-
-
+import { writeToFirestore ,writeToFirestore2} from '@/lib/FirebaseConfig';
 
 export default function Register({ onSwitch }: { onSwitch: () => void }) {
   console.log('Register')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const doRegister = async (event:any) => {
+  const doRegister = async (event: any) => {
     event.preventDefault();
+    const auth = getAuth();
+
 
     try {
-      const auth = getAuth();
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      alert('登録完了！');
       const userId = user?.email;
+      console.log(userId);
+
       if (userId) {
-        writeToFirestore("userProfile", userId, { imageUrl: "gs://authtest-f6078.appspot.com/images/noImage.png" });
+        writeToFirestore2("userProfile", userId, { name:"",age:"",affilication:"",imageUrl: "https://firebasestorage.googleapis.com/v0/b/authtest-f6078.appspot.com/o/images%2FnoImage.png?alt=media&token=ce8f80ba-0a01-49c6-bea6-e1ec93b839b4",language: { C: false, Python: false, Java: false, Javascript: false, Nextjs: false }});
+        alert('登録完了！');
       }
       else{
         console.log('userId is null');
+        alert('ユーザー無し')
       }
     } catch (error) {
       console.error("Error adding document: ", error);

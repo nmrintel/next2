@@ -20,8 +20,8 @@ const ImageUploadForm = () => {
 
   return (
     <Form>
+      <h1>新しいプロフィール画像</h1>
       <Input type="file" onChange={handleChange} />
-      <DisplayImg />
     </Form>
   );
 };

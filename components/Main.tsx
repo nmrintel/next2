@@ -5,6 +5,7 @@ import { useAuth } from '../lib/AuthContext';
 import PageMotion from './motion'
 import React from "react"
 import Viewer from './View'
+import Board from './Board/board'
 
 export default function Main() {
     const [mode, setMode] = useState(0)
@@ -15,6 +16,10 @@ export default function Main() {
 
     const SwitchToEdit = () => {
         setMode(1)
+    }
+
+    const SwitchToBoard = () => {
+        setMode(2)
     }
 
     const users = useAuth();
@@ -43,14 +48,19 @@ export default function Main() {
                     </div>
                 );
             }
-        } else {
+
+        }
+        else if (mode === 2) {
+            return <Board />;
+        }
+        else {
             return null;
         }
     }
 
     return (
         <>
-            <Header onSwitch1={SwitchToView} onSwitch2={SwitchToEdit} mode={mode} />
+            <Header onSwitch1={SwitchToView} onSwitch2={SwitchToEdit} onSwitch3={SwitchToBoard}mode={mode} />
             {RenderComponent()}
         </>
     );

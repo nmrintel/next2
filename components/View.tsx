@@ -5,7 +5,7 @@ import { Badge } from 'reactstrap';
 
 export default function Viewer() {
     const userId = useAuth().currentUser.email;
-    const [profile, setProfile] = useState<{ name: string, age: string, affiliation: string, imageUrl: string, language: { C: boolean, Python: boolean, Java: boolean, Javascript: boolean, Nextjs: boolean } }>({ name: "inital", age: "", affiliation: "", imageUrl: "", language: { C: false, Python: false, Java: false, Javascript: false, Nextjs: false } });
+    const [profile, setProfile] = useState<{ name: string, age: string, affiliation: string, imageUrl: string,text:string, language: { C: boolean, Python: boolean, Java: boolean, Javascript: boolean, Nextjs: boolean } }>({ name: "inital", age: "", affiliation: "", imageUrl: "",text:"", language: { C: false, Python: false, Java: false, Javascript: false, Nextjs: false } });
 
     useEffect(() => {
         readFromFirestore("userProfile", userId)
@@ -19,7 +19,7 @@ export default function Viewer() {
     }, [userId]);
 
     return (
-        <div style={{ marginTop: '100px', marginLeft: '500px' }}>
+        <div style={{ marginTop: '100px', marginLeft: '400px',marginRight:'250px' }}>
             <h1>プロフィール</h1>
             <div style={{ display: 'flex' }}>
                 <div style={{ flex: '1' }}>
@@ -67,6 +67,11 @@ export default function Viewer() {
                 >
                     Nextjs
                 </Badge>
+            </div>
+
+            <div style={{ marginTop: '50px'} }>
+                <h2>自己紹介</h2>
+                <p>{profile.text}</p>
             </div>
         </div>
     );
