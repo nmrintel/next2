@@ -70,7 +70,6 @@ export async function readFromFirestore(collection: string, docId: string) {
 
     const docSnap = await getDoc(doc(db, collection, docId));
     if (docSnap.exists()) {
-      console.log("Document data(readFromFiresotre in firebaseConfig):", docSnap.data());
       return docSnap.data();
     } else {
       console.log("No such document!(readFromFiresotre in firebaseConfig)");
@@ -88,9 +87,7 @@ export async function readFromFiresotre2(collection: string, docId: string, data
 
     const docSnap = await getDoc(doc(db, collection, docId));
     if (docSnap.exists()) {
-      console.log("Document data(readFromFiresotre in firebaseConfig):", docSnap.data());
       const specificData = docSnap.data()?.[data_name]; // Access specific data field using dot notation
-      console.log("Specific data:", specificData);
       return specificData;
     } else {
       console.log("No such document!(readFromFiresotre in firebaseConfig)");
