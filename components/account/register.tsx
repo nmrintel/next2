@@ -22,7 +22,7 @@ export default function Register({ onSwitch }: { onSwitch: () => void }) {
       console.log(userId);
 
       if (userId) {
-        writeToFirestore2("userProfile", userId, { name:"",age:"",affilication:"",imageUrl: "https://firebasestorage.googleapis.com/v0/b/authtest-f6078.appspot.com/o/images%2FnoImage.png?alt=media&token=ce8f80ba-0a01-49c6-bea6-e1ec93b839b4",language: { C: false, Python: false, Java: false, Javascript: false, Nextjs: false }});
+        writeToFirestore2("userProfile", userId, { name:"",age:"",affiliation:"",imageUrl: "https://firebasestorage.googleapis.com/v0/b/authtest-f6078.appspot.com/o/images%2FnoImage.png?alt=media&token=ce8f80ba-0a01-49c6-bea6-e1ec93b839b4",language: { C: false, Python: false, Java: false, Javascript: false, Nextjs: false }});
         alert('登録完了！');
       }
       else{
