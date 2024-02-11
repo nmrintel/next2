@@ -78,7 +78,9 @@ const BoardContent = () => {
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((id) => (
                     <div key={(currentPage-1)*9+id} style={{ flex: '100 100 33.33%', padding: '10px' }}>
-                        <Fedin children={UserCard(id,currentPage)}/>
+                        <Fedin>
+                            <UserCard id={id} currentPage={currentPage}/>
+                        </Fedin>
                     </div>
                 ))}
             </div>
@@ -86,7 +88,7 @@ const BoardContent = () => {
     );
 }
 
-export const UserCard = (id: number,currentPage:number) => {
+export const UserCard = ({id,currentPage}:{id:number,currentPage:number}) => {
     const [profile, setProfile] = useState<{ name: string, age: string, affiliation: string, imageUrl: string, text: string, language: { C: boolean, Python: boolean, Java: boolean, Javascript: boolean, Nextjs: boolean } }>({ name: "inital", age: "", affiliation: "", imageUrl: "", text: "", language: { C: false, Python: false, Java: false, Javascript: false, Nextjs: false } });
     const [imageLoaded, setImageLoaded] = useState(false);
     const [pageloaded, setPageLoaded] = useState(false);

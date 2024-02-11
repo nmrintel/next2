@@ -26,14 +26,16 @@ export default function Main() {
     const users = useAuth();
 
     const RenderComponent = () => {
-        if (mode === 0) {
+        if (mode === 1) {
             if (users.currentUser) {
                 const userId = users.currentUser.email;
                 console.log("userId in Main:", userId);
-                
+
                 return (
-                    <div style={{ marginTop: '10%', marginLeft: '40%', marginRight:'25%' }}>
-                        <PageMotion children={<Viewer id={userId}/>}/>
+                    <div style={{ marginTop: '10%', marginLeft: '40%', marginRight: '25%' }}>
+                        <PageMotion >
+                            <Viewer id={userId} />
+                        </PageMotion>
                     </div>
                 );
             }
@@ -45,9 +47,13 @@ export default function Main() {
                 );
             }
 
-        } else if (mode === 1) {
+        } else if (mode === 2) {
             if (users.currentUser) {
-                return <PageMotion children={<Edit/>}/>
+                return (
+                    <PageMotion>
+                        <Edit />
+                    </PageMotion>
+                )
             }
             else {
                 return (
@@ -58,8 +64,8 @@ export default function Main() {
             }
 
         }
-        else if (mode === 2) {
-            return <Board/>
+        else if (mode === 0) {
+            return <Board />
         }
         else {
             return null;
@@ -68,7 +74,7 @@ export default function Main() {
 
     return (
         <>
-            <Header onSwitch1={SwitchToView} onSwitch2={SwitchToEdit} onSwitch3={SwitchToBoard}mode={mode} />
+            <Header onSwitch1={SwitchToView} onSwitch2={SwitchToEdit} onSwitch3={SwitchToBoard} mode={mode} />
             {RenderComponent()}
         </>
     );

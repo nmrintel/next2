@@ -40,7 +40,7 @@ export default function Header({ onSwitch1, onSwitch2, onSwitch3,mode }: { onSwi
               onClick={onSwitch1}
               style={{ color: (mode == 0) ? "white" : "blue", backgroundColor: (mode == 0) ? "blue" : "white" }}
             >
-              自分のポートフォリオをみる
+              Home
             </NavLink>
           </NavItem>
 
@@ -50,7 +50,7 @@ export default function Header({ onSwitch1, onSwitch2, onSwitch3,mode }: { onSwi
               onClick={onSwitch2}
               style={{ color: (mode === 1) ? "white" : "blue", backgroundColor: (mode === 1) ? "blue" : "white" }}
             >
-              自分のポートフォリオの編集する
+              自分のプロフィールを見る
             </NavLink>
           </NavItem>
 
@@ -60,7 +60,7 @@ export default function Header({ onSwitch1, onSwitch2, onSwitch3,mode }: { onSwi
               onClick={onSwitch3}
               style={{ color: (mode === 2) ? "white" : "blue", backgroundColor: (mode === 2) ? "blue" : "white" }}
             >
-              他の人のプロフィールをみる
+              自分のプロフィールを編集する
             </NavLink>
           </NavItem>
 
