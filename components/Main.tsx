@@ -6,6 +6,7 @@ import PageMotion from './motion'
 import React from "react"
 import Viewer from './View'
 import Board from './Board/board'
+import Fedin from "./motion"
 
 export default function Main() {
     const [mode, setMode] = useState(0)
@@ -27,7 +28,14 @@ export default function Main() {
     const RenderComponent = () => {
         if (mode === 0) {
             if (users.currentUser) {
-                return <PageMotion Children={Viewer} />;
+                const userId = users.currentUser.email;
+                console.log("userId in Main:", userId);
+                
+                return (
+                    <div style={{ marginTop: '10%', marginLeft: '40%', marginRight:'25%' }}>
+                        <PageMotion children={<Viewer id={userId}/>}/>
+                    </div>
+                );
             }
             else {
                 return (
@@ -39,7 +47,7 @@ export default function Main() {
 
         } else if (mode === 1) {
             if (users.currentUser) {
-                return <Edit />;
+                return <PageMotion children={<Edit/>}/>
             }
             else {
                 return (
@@ -51,7 +59,7 @@ export default function Main() {
 
         }
         else if (mode === 2) {
-            return <Board />;
+            return <Board/>
         }
         else {
             return null;

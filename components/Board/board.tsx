@@ -5,9 +5,10 @@ import { Placeholder, PlaceholderButton } from 'reactstrap';
 import { getDocumentIds, readFromFirestore } from "@/lib/FirebaseConfig";
 import 'firebase/firestore';
 import { set } from 'firebase/database';
+import Example from "./modal"
+import Fedin from "@/components/motion"
 
-
-const PageNum = React.createContext({ currentPage: 1, maxPage: 1, setMaxPage: (page: number) => { } });
+const PageNum = React.createContext({ currentPage: 1, maxPage: 1, loaded:false,setloaded:(loaded:boolean) => {},setMaxPage: (page: number) => { } });
 
 const whitespaceLoop = (length: number) => {
     let result = '';
@@ -45,16 +46,20 @@ export default function Board() {
     console.log("Board");
     const [currentPage, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(10);
+    const [loaded,setloaded] = useState(false)
 
     return (
         <div>
-            <PageNum.Provider value={{ currentPage, maxPage, setMaxPage }}>
+            <PageNum.Provider value={{ currentPage, maxPage, loaded,setloaded,setMaxPage }}>
                 <BoardContent />
             </PageNum.Provider>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                {loaded&&
+                <>
                 <Button onClick={() => { setPage(currentPage - 1) }} style={{ margin: '10px' }} disabled={currentPage === 1}>&lt;</Button>
                 <Button disabled>{currentPage}</Button>
                 <Button onClick={() => { setPage(currentPage + 1) }} style={{ margin: '10px' }} disabled={currentPage === Math.floor(maxPage / 9) + 1}>&gt;</Button>
+                </>}
             </div>
         </div>
     );
@@ -72,18 +77,21 @@ const BoardContent = () => {
         <div style={{ marginLeft: "250px",marginRight: "150px" }}>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((id) => (
-                    <div key={(currentPage-1)*9+id} style={{ flex: '100 100 33.33%', padding: '10px' }}>{userCard(id,currentPage)}</div>
+                    <div key={(currentPage-1)*9+id} style={{ flex: '100 100 33.33%', padding: '10px' }}>
+                        <Fedin children={UserCard(id,currentPage)}/>
+                    </div>
                 ))}
             </div>
         </div>
     );
 }
 
-export const userCard = (id: number,currentPage:number) => {
+export const UserCard = (id: number,currentPage:number) => {
     const [profile, setProfile] = useState<{ name: string, age: string, affiliation: string, imageUrl: string, text: string, language: { C: boolean, Python: boolean, Java: boolean, Javascript: boolean, Nextjs: boolean } }>({ name: "inital", age: "", affiliation: "", imageUrl: "", text: "", language: { C: false, Python: false, Java: false, Javascript: false, Nextjs: false } });
     const [imageLoaded, setImageLoaded] = useState(false);
     const [pageloaded, setPageLoaded] = useState(false);
-    const { maxPage, setMaxPage } = useContext(PageNum);
+    const { maxPage, setMaxPage ,setloaded} = useContext(PageNum);
+    const [Id,setId] = useState("");
 
 
     useEffect(() => {
@@ -91,9 +99,11 @@ export const userCard = (id: number,currentPage:number) => {
             setMaxPage(ids.length);
             if (((currentPage - 1) * 9 + id) <= ids.length) {
                 const docId = ids[(currentPage - 1) * 9 + id - 1];
+                setId(docId)
                 readFromFirestore("userProfile", docId).then((doc: any) => {
                     setProfile(doc);
                     setPageLoaded(true);
+                    setloaded(true)
                 }).catch((error) => {
                     console.log("Error getting document:", error);
                 });
@@ -138,12 +148,12 @@ export const userCard = (id: number,currentPage:number) => {
                         <CardText>
                             {formatText(profile.text)}
                         </CardText>
-                        <Button>
-                            Button
-                        </Button>
+                        <Example id={Id}/>
+
                     </CardBody>
                 </Card>
             )}
+            
         </>
     )
 }

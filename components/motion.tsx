@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import React from "react"
 
-
 const pageTransition = {
   hidden: {
     opacity: 0,
@@ -19,7 +18,7 @@ const pageTransition = {
   },
 };
 
-export default function PageMotion({ Children}:{Children:React.ElementType}) {
+export  function PageMotion({children}:{children:any}) {
   return (
     <motion.div
       initial="hidden"
@@ -27,7 +26,27 @@ export default function PageMotion({ Children}:{Children:React.ElementType}) {
       exit="exit"
       variants={pageTransition}
     >
-      <Children/>
+      {children}
     </motion.div>
   );
 }
+
+
+export default function FadeIn({ children }: { children: React.ReactNode }) {
+  const fadeInVariants = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: { duration: 3 },
+    },
+  };
+
+  return (
+    <motion.div initial="hidden" animate="visible" variants={fadeInVariants}>
+      {children}
+    </motion.div>
+  );
+}
+

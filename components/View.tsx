@@ -3,23 +3,23 @@ import { useAuth } from '@/lib/AuthContext';
 import { readFromFirestore } from "@/lib/FirebaseConfig";
 import { Badge } from 'reactstrap';
 
-export default function Viewer() {
-    const userId = useAuth().currentUser.email;
+export default function Viewer({id}:{id:string}) {
     const [profile, setProfile] = useState<{ name: string, age: string, affiliation: string, imageUrl: string,text:string, language: { C: boolean, Python: boolean, Java: boolean, Javascript: boolean, Nextjs: boolean } }>({ name: "inital", age: "", affiliation: "", imageUrl: "",text:"", language: { C: false, Python: false, Java: false, Javascript: false, Nextjs: false } });
 
     useEffect(() => {
-        readFromFirestore("userProfile", userId)
+        readFromFirestore("userProfile", id)
             .then((doc: any) => {
                 setProfile(doc);
                 console.log("Profile in Viewer:", doc.name);
+                console.log(id)
             })
             .catch((error) => {
                 console.log("Error getting document:", error);
             });
-    }, [userId]);
+    }, []);
 
     return (
-        <div style={{ marginTop: '100px', marginLeft: '400px',marginRight:'250px' }}>
+        <div>
             <h1>プロフィール</h1>
             <div style={{ display: 'flex' }}>
                 <div style={{ flex: '1' }}>

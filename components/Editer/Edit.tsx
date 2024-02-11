@@ -35,6 +35,21 @@ function Check(props: any) {
     setCh5(event.target.checked);
   }
 
+  let profile:{C:boolean, Java:boolean, JavaScript:boolean, Nextjs:boolean, Python:boolean} = {C:false, Java:false, JavaScript:false, Nextjs:false, Python:false};
+
+  useEffect(() => {
+    readFromFirestore("userProfile", userID).then((doc: any) => {
+      profile = doc.language;
+      setCh1(profile.C);
+      setCh2(profile.Python);
+      setCh3(profile.Java);
+      setCh4(profile.JavaScript);
+      setCh5(profile.Nextjs);
+    }).catch((error) => {
+      console.log("Error getting document:", error);
+    });
+  }, []);
+
   const handleSubmit2 = (event: any) => {
     console.log("handleSubmit2");
     event.preventDefault();
