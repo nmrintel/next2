@@ -25,7 +25,7 @@ const formatText = (text: string) => {
     } else if (text) {
         return text + whitespaceLoop(maxLength - text.length);
     } else {
-        return '自己紹介未設定';
+        return '未設定';
     }
 }
 
@@ -143,13 +143,13 @@ export const UserCard = ({id,currentPage}:{id:number,currentPage:number}) => {
 
                     <CardBody>
                         <CardTitle tag="h5">
-                            {profile.name}
+                            {formatText(profile.name)}
                         </CardTitle>
                         <CardSubtitle
                             className="mb-2 text-muted"
                             tag="h6"
                         >
-                            {profile.affiliation}
+                            {formatText(profile.affiliation)}
                         </CardSubtitle>
                         <CardText>
                             {formatText(profile.text)}
