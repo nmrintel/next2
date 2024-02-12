@@ -39,7 +39,7 @@ export default function FadeIn({ children }: { children: React.ReactNode }) {
     },
     visible: {
       opacity: 1,
-      transition: { duration: 5 },
+      transition: { duration: 2 },
     },
   };
 
