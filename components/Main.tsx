@@ -65,7 +65,11 @@ export default function Main() {
 
         }
         else if (mode === 0) {
-            return <Board />
+            return (
+            <Fedin>
+            <Board />
+            </Fedin>
+            )
         }
         else {
             return null;

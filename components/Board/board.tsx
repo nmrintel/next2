@@ -8,7 +8,7 @@ import { set } from 'firebase/database';
 import Example from "./modal"
 import Fedin from "@/components/motion"
 
-const PageNum = React.createContext({ currentPage: 1, maxPage: 1, loaded:false,setloaded:(loaded:boolean) => {},setMaxPage: (page: number) => { } });
+const PageNum = React.createContext({ currentPage: 1, maxPage: 1, allLoaded:false,setAllLoaded:(loaded:boolean) => {},setMaxPage: (page: number) => { } });
 
 const whitespaceLoop = (length: number) => {
     let result = '';
@@ -46,15 +46,19 @@ export default function Board() {
     console.log("Board");
     const [currentPage, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(10);
-    const [loaded,setloaded] = useState(false)
+    const [allLoaded,setAllLoaded] = useState(false)
+
+    useEffect(() => {
+        setAllLoaded(false);
+    }, [currentPage]);
 
     return (
         <div>
-            <PageNum.Provider value={{ currentPage, maxPage, loaded,setloaded,setMaxPage }}>
+            <PageNum.Provider value={{ currentPage, maxPage, allLoaded,setAllLoaded,setMaxPage }}>
                 <BoardContent />
             </PageNum.Provider>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                {loaded&&
+                {allLoaded&&
                 <>
                 <Button onClick={() => { setPage(currentPage - 1) }} style={{ margin: '10px' }} disabled={currentPage === 1}>&lt;</Button>
                 <Button disabled>{currentPage}</Button>
@@ -92,7 +96,7 @@ export const UserCard = ({id,currentPage}:{id:number,currentPage:number}) => {
     const [profile, setProfile] = useState<{ name: string, age: string, affiliation: string, imageUrl: string, text: string, language: { C: boolean, Python: boolean, Java: boolean, Javascript: boolean, Nextjs: boolean } }>({ name: "inital", age: "", affiliation: "", imageUrl: "", text: "", language: { C: false, Python: false, Java: false, Javascript: false, Nextjs: false } });
     const [imageLoaded, setImageLoaded] = useState(false);
     const [pageloaded, setPageLoaded] = useState(false);
-    const { maxPage, setMaxPage ,setloaded} = useContext(PageNum);
+    const { maxPage, setMaxPage ,setAllLoaded,allLoaded} = useContext(PageNum);
     const [Id,setId] = useState("");
 
 
@@ -105,7 +109,7 @@ export const UserCard = ({id,currentPage}:{id:number,currentPage:number}) => {
                 readFromFirestore("userProfile", docId).then((doc: any) => {
                     setProfile(doc);
                     setPageLoaded(true);
-                    setloaded(true)
+                    if(id==9 || ((currentPage-1)*9+id == ids.length))setAllLoaded(true)
                 }).catch((error) => {
                     console.log("Error getting document:", error);
                 });
@@ -123,13 +127,13 @@ export const UserCard = ({id,currentPage}:{id:number,currentPage:number}) => {
 
     return (
         <>
-            {pageloaded && (
+            {allLoaded&&pageloaded && (
                 <Card
                     style={{
                         width: '18rem',
                     }}
                 >
-                    {imageLoaded ? null : imgPlaceholder()}
+                    {/* {imageLoaded ? null : imgPlaceholder()} */}
                     <img
                         alt="Sample"
                         src={profile.imageUrl}
