@@ -3,7 +3,7 @@ import { useAuth } from '@/lib/AuthContext';
 import { readFromFirestore } from "@/lib/FirebaseConfig";
 import { Badge } from 'reactstrap';
 
-export default function Viewer({id}:{id:string}) {
+export default function Viewer({id,setLoaded}:{id:string,setLoaded:(loaded:boolean)=>void}) {
     const [profile, setProfile] = useState<{ name: string, age: string, affiliation: string, imageUrl: string,text:string, language: { C: boolean, Python: boolean, Java: boolean, Javascript: boolean, Nextjs: boolean } }>({ name: "inital", age: "", affiliation: "", imageUrl: "",text:"", language: { C: false, Python: false, Java: false, Javascript: false, Nextjs: false } });
 
     useEffect(() => {
@@ -12,6 +12,7 @@ export default function Viewer({id}:{id:string}) {
                 setProfile(doc);
                 console.log("Profile in Viewer:", doc.name);
                 console.log(id)
+                setLoaded(true);
             })
             .catch((error) => {
                 console.log("Error getting document:", error);
