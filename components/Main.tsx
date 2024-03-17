@@ -36,7 +36,7 @@ export default function Main() {
                     <>
                     <div style={{ marginTop: '10%', marginLeft: '40%', marginRight: '25%' }}>
                         <PageMotion >
-                            <Viewer id={userId} setLoaded={setLoaded} />
+                            <Viewer id={userId} />
                         </PageMotion>
                     </div>
                     {loaded &&
